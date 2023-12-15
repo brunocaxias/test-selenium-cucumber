@@ -3,22 +3,22 @@ from behave import given, when, then
 from src.test_categoria import TestCategoria
 import time
 
-testeCategoria  = None
+testeCategoria = None
 
 @given(u'dado as informações sobre uma categoria deficiênca: {categoria}')
 def step_impl(context, categoria):
     context.testeCategoria = TestCategoria(categoria)  
     time.sleep(5)
     
-@when(u'eu clicar em {acao}')
-def step_impl(context, acao):
+@when(u'eu clicar em Cadastrar Categoria')
+def step_impl(context):
     context.testeCategoria.executar_teste()
     time.sleep(8)
 
 
-@then(u'as informações da deficiência são exibidas corretamente: {resultado}')
-def step_impl(context):
-    assert(context.testeCategoria.categoria)
+@then(u'as informações da categoria são exibidas corretamente: {resultado}')
+def step_impl(context, resultado):
+    assert context.testeCategoria.nome_categoria == resultado, f'[Falha] O teste deveria cadastrar: {resultado}'
     time.sleep(2)
 
 # @given(u'eu tenho {nome} e {descricao}')

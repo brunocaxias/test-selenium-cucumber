@@ -1,10 +1,12 @@
+from selenium import webdriver
 from time import sleep
-from utils import click_btn, input_text
+from src.utils import click_btn, input_text
 
 class TestDeficiencia():
     def __init__(self, nome_deficiencia, nome_categoria):
         self.nome_deficiencia = nome_deficiencia
         self.nome_categoria = nome_categoria
+        self.driver = webdriver.Chrome()
         
     def executar_teste(self):
         xpath_botao_novo = "/html/body/div[2]/div/div/div[1]/div/div[1]/div/div[1]/div[2]/div/div/div/div/div/div/div/div/div/div[1]/div/div[2]/div/div[2]/button"
@@ -27,3 +29,5 @@ class TestDeficiencia():
             print(">> O TESTE PASSOU !")
         except:
             print(">> O TESTE FALHOU !")  
+        
+        self.driver.quit()

@@ -1,5 +1,4 @@
 from selenium import webdriver
-
 from time import sleep
 from src.utils import click_btn, input_text
 
