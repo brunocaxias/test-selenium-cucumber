@@ -2,6 +2,11 @@ from selenium import webdriver
 from time import sleep
 from src.utils import click_btn, input_text
 
+
+def main():
+    TestPessoa("eu", "123456", "", "", "", "", "", "", "", "").executar_teste()
+
+
 class TestPessoa():
     def __init__(self, nome, cpf, email, dataNascimento, contato, rg, rendaFamiliar, etnia, sexo, deficiencia):
         self.nome = nome
@@ -15,10 +20,10 @@ class TestPessoa():
         self.sexo = sexo
         self.deficiencia = deficiencia
         self.driver = webdriver.Chrome()
-        
+
     def executar_teste(self):
         xpath_botao_novo = "/html/body/div[2]/div/div/div[1]/div/div[1]/div/div[1]/div[2]/div/div/div/div/div/div/div/div/div/div[1]/div/div[2]/div/div[5]/button"
-        xpath_botao_salvar =  "/html/body/div[2]/div/div/div[1]/div/div[1]/div/div[2]/div[2]/div/div/div/div/div/div/div/div/div[1]/div/div[2]/div/div/button"
+        xpath_botao_salvar = "/html/body/div[2]/div/div/div[1]/div/div[1]/div/div[2]/div[2]/div/div/div/div/div/div/div/div/div[1]/div/div[2]/div/div/button"
         # xpath_input_deficiencia = "/html/body/div[2]/div/div/div[1]/div/div[1]/div/div[2]/div[2]/div/div/div/div/div/div/div/div/div[2]/div/div/div[1]/div/div/div/input"
         # xpath_categoria_select = "/html/body/div[2]/div/div/div[1]/div/div[1]/div/div[2]/div[2]/div/div/div/div/div/div/div/div/div[2]/div/div/div[2]/div/div/button"
         # xpath_categoria = "/html/body/div[2]/div/div/div[1]/div/div[5]/div/div/div/ul/li[2]"
@@ -31,8 +36,9 @@ class TestPessoa():
 
         try:
             self.driver.get("https://serra.budibase.app/app/serra-para-todos#/pessoa")
+
             sleep(10)
-            
+
             click_btn(self.driver, xpath_botao_novo, 10)
             input_text(self.driver, xpath_nome, "Joao")
             input_text(self.driver, xpath_cpf, "1234567890")
@@ -43,9 +49,14 @@ class TestPessoa():
             # click_btn(self.driver, xpath_categoria_select, 10)
             sleep(3)
             click_btn(self.driver, xpath_botao_salvar)
-            
+            sleep(3)
+
             print(">> O TESTE PASSOU !")
         except:
-            print(">> O TESTE FALHOU !")  
-        
+            print(">> O TESTE FALHOU !")
+
         self.driver.quit()
+
+
+if __name__ == "__main__":
+    main()
