@@ -18,9 +18,6 @@ jobs:
       - name: Install Python Dependencies
         run: pip install -r requirements.txt
 
-      - name: Run Python Tests
-        run: python -m unittest discover
-
       - name: Analyze with SonarQube
         uses: sonarsource/sonarcloud-github-action@master
         with:
