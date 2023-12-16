@@ -30,7 +30,7 @@ jobs:
 
       - name: Run SonarQube analysis
         run: |
-          sonar-scanner  -Dsonar.login=$SONAR_TOKEN 
+          sonar-scanner
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
