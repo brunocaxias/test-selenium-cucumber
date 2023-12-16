@@ -1,0 +1,17 @@
+name: Sonar
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: sonarsource/sonarcloud-github-action@master
+        with:
+          sonar-token: ${{ 44116a96832124a0d0bd6996abf9ac1ca0cc9e4e }}
