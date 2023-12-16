@@ -32,7 +32,8 @@ jobs:
         run: |
           sonar-scanner \
             -Dsonar.projectKey=brunocaxias_test-selenium-cucumber \
-            -Dsonar.organization=serra-para-todos
+            -Dsonar.organization=serra-para-todos \
+            -Dsonar.sources=.
 
       - name: Upload SonarQube analysis results
         uses: sonarsource/sonarcloud-github-action@master
