@@ -1,42 +1,72 @@
+name: Run Python Tests and Analyze with SonarQube
 on:
-  push:
+  pull_request:
     branches:
       - main
 
 jobs:
-  sonarqube-analysis:
+  build:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v3
+      - name: Install Python
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.x
+          python-version: 3.8
 
-      - name: Install SonarScanner
-        run: |
-          sudo apt-get install unzip
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-          unzip sonar-scanner-cli-4.6.2.2472-linux.zip
-          export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
+      - name: Install Python Dependencies
+        run: pip install -r requirements.txt
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+      - name: Run Python Tests
+        run: python -m unittest discover
 
-      - name: Run SonarQube analysis
-        run: |
-          sonar-scanner \
-            -Dsonar.projectKey=brunocaxias_test-selenium-cucumber \
-            -Dsonar.organization=serra-para-todos \
-            -Dsonar.sources=.
-
-      - name: Upload SonarQube analysis results
+      - name: Analyze with SonarQube
         uses: sonarsource/sonarcloud-github-action@master
         with:
-          github_token: ${{ secrets.USER_TOKEN }}
-          sonar_token: ${{ secrets.SONAR_TOKEN }}
+          sonar-project-key: "brunocaxias_test-selenium-cucumber"
+          sonar-organization: "serra-para-todos"
+
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   sonarqube-analysis:
+#     runs-on: ubuntu-latest
+    
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+
+#       - name: Set up Python
+#         uses: actions/setup-python@v3
+#         with:
+#           python-version: 3.x
+
+#       - name: Install SonarScanner
+#         run: |
+#           sudo apt-get install unzip
+#           wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+#           unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+#           export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
+
+#       - name: Install dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install -r requirements.txt
+
+#       - name: Run SonarQube analysis
+#         run: |
+#           sonar-scanner \
+#             -Dsonar.projectKey=brunocaxias_test-selenium-cucumber \
+#             -Dsonar.organization=serra-para-todos \
+#             -Dsonar.sources=.
+
+#       - name: Upload SonarQube analysis results
+#         uses: sonarsource/sonarcloud-github-action@master
+#         with:
+#           github_token: ${{ secrets.USER_TOKEN }}
+#           sonar_token: ${{ secrets.SONAR_TOKEN }}
