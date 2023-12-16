@@ -28,8 +28,10 @@ jobs:
           unzip sonar-scanner-cli-4.6.2.2472-linux.zip
           export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
           echo "$PATH"
-          sonar-scanner  -Dsonar.projectKey=brunocaxias_test-selenium-cucumber -Dsonar.organization=serra-para-todos -Dsonar.sources=features
-
+          sonar-scanner  -Dsonar.login=$SONAR_TOKEN
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
       - name: Upload SonarQube analysis results
         uses: sonarsource/sonarcloud-github-action@master
         with:
