@@ -24,8 +24,8 @@ jobs:
       - name: Analyze with SonarQube
         uses: sonarsource/sonarcloud-github-action@master
         with:
-          sonar-project-key: "brunocaxias_test-selenium-cucumber"
-          sonar-organization: "serra-para-todos"
+          sonar-project-key: brunocaxias_test-selenium-cucumbe
+          sonar-organization: serra-para-todos
 
 
 # on:
