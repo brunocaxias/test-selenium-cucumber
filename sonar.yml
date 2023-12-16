@@ -30,5 +30,5 @@ jobs:
     - name: Upload SonarQube analysis results
       uses: sonarsource/sonarcloud-github-action@master
       with:
-        github_token: ${{ afsçkqoufiquwbfuiqfbdasd1çi3hr813gfonf }}
-        sonar_token: ${{ 44116a96832124a0d0bd6996abf9ac1ca0cc9e4e }}
+        github_token: ${{ secrets.USER_TOKEN }}
+        sonar_token: ${{ secrets.SONAR_TOKEN }}
