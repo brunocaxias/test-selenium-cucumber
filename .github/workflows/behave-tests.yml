@@ -1,0 +1,3 @@
+ - name: Run Behave tests
+    run: |
+      behave
